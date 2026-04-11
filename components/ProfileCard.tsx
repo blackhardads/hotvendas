@@ -1,34 +1,52 @@
 "use client";
 
-import { Check, MoreVertical, Images, Play, UserCheck, Heart } from "lucide-react";
+import { MoreVertical, Images, Play, UserCheck, Heart } from "lucide-react";
+import React from "react";
 import { useState } from "react";
 
-const STATS = [
-  { icon: Images,     value: "159" },
-  { icon: Play,       value: "626" },
-  { icon: UserCheck,  value: "53" },
-  { icon: Heart,      value: "364.6K" },
+const DEFAULT_STATS = [
+  { icon: Images,    value: "159" },
+  { icon: Play,      value: "626" },
+  { icon: UserCheck, value: "53" },
+  { icon: Heart,     value: "364.6K" },
 ];
 
-const BIO = "Só fica quem tem coragem de desvendar cada segredinho da sua Loirinha.... vem? 😜";
+const DEFAULT_BIO = "Só fica quem tem coragem de desvendar cada segredinho da sua Loirinha.... vem? 😜";
 
-export default function ProfileCard() {
+interface ProfileCardProps {
+  name?: string;
+  username?: string;
+  bio?: string;
+  stats?: { icon: React.ElementType; value: string }[];
+  profileImg?: string;
+  coverClass?: string;
+  coverImg?: string;
+}
+
+export default function ProfileCard({
+  name = "Emilly Faria",
+  username = "@millyfaria4",
+  bio = DEFAULT_BIO,
+  stats = DEFAULT_STATS,
+  profileImg = "img/profile-img.png",
+  coverClass = "cover-bg",
+  coverImg,
+}: ProfileCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const short = BIO.slice(0, 120);
+  const short = bio.slice(0, 120);
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
       {/* Cover */}
       <div className="relative h-50 w-full bg-gradient-to-br from-[#f0f0f0] via-[#e0e0e0] to-[#d0d0d0] sm:h-32">
-        <div className="cover-bg absolute inset-0 opacity-100" />
+        <div
+          className={`${coverImg ? "" : coverClass} absolute inset-0 opacity-100`}
+          style={coverImg ? { backgroundImage: `url('${coverImg}')`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+        />
         {/* Avatar */}
-      <div className="absolute -bottom-8 left-4 h-24 w-24 overflow-hidden rounded-full border-[3px] border-white bg-gray-200">
-  <img 
-    src="img/profile-img.png" 
-    alt="avatar"
-    className="h-full w-full object-cover"
-  />
-</div>
+        <div className="absolute -bottom-8 left-4 h-24 w-24 overflow-hidden rounded-full border-[3px] border-white bg-gray-200">
+          <img src={profileImg} alt="avatar" className="h-full w-full object-cover" />
+        </div>
       </div>
 
       {/* Body */}
@@ -36,29 +54,21 @@ export default function ProfileCard() {
         {/* Name row */}
         <div className="flex items-start justify-between">
           <div>
-           <div className="flex items-center gap-1.5">
-  <h1 className="text-[17px] font-bold tracking-[-0.03em] text-black">
-    Emilly Faria
-  </h1>
-
-  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#0000]">
-    <svg
-      fill="none"
-      viewBox="0 0 22 22"
-      className="h-9 w-9"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9.00012 12L11.0001 14L15.0001 10M7.83486 4.69705C8.55239 4.63979 9.23358 4.35763 9.78144 3.89075C11.0599 2.80123 12.9403 2.80123 14.2188 3.89075C14.7667 4.35763 15.4478 4.63979 16.1654 4.69705C17.8398 4.83067 19.1695 6.16031 19.3031 7.83474C19.3603 8.55227 19.6425 9.23346 20.1094 9.78132C21.1989 11.0598 21.1989 12.9402 20.1094 14.2187C19.6425 14.7665 19.3603 15.4477 19.3031 16.1653C19.1695 17.8397 17.8398 19.1693 16.1654 19.303C15.4479 19.3602 14.7667 19.6424 14.2188 20.1093C12.9403 21.1988 11.0599 21.1988 9.78144 20.1093C9.23358 19.6424 8.55239 19.3602 7.83486 19.303C6.16043 19.1693 4.83079 17.8397 4.69717 16.1653C4.63991 15.4477 4.35775 14.7665 3.89087 14.2187C2.80135 12.9402 2.80135 11.0598 3.89087 9.78132C4.35775 9.23346 4.63991 8.55227 4.69717 7.83474C4.83079 6.16031 6.16043 4.83067 7.83486 4.69705Z"
-        stroke="orange"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </span>
-</div>
-            <p className="text-[15px] text-gray-500">@millyfaria4</p>
+            <div className="flex items-center gap-1.5">
+              <h1 className="text-[17px] font-bold tracking-[-0.03em] text-black">{name}</h1>
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#0000]">
+                <svg fill="none" viewBox="0 0 22 22" className="h-9 w-9" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M9.00012 12L11.0001 14L15.0001 10M7.83486 4.69705C8.55239 4.63979 9.23358 4.35763 9.78144 3.89075C11.0599 2.80123 12.9403 2.80123 14.2188 3.89075C14.7667 4.35763 15.4478 4.63979 16.1654 4.69705C17.8398 4.83067 19.1695 6.16031 19.3031 7.83474C19.3603 8.55227 19.6425 9.23346 20.1094 9.78132C21.1989 11.0598 21.1989 12.9402 20.1094 14.2187C19.6425 14.7665 19.3603 15.4477 19.3031 16.1653C19.1695 17.8397 17.8398 19.1693 16.1654 19.303C15.4479 19.3602 14.7667 19.6424 14.2188 20.1093C12.9403 21.1988 11.0599 21.1988 9.78144 20.1093C9.23358 19.6424 8.55239 19.3602 7.83486 19.303C6.16043 19.1693 4.83079 17.8397 4.69717 16.1653C4.63991 15.4477 4.35775 14.7665 3.89087 14.2187C2.80135 12.9402 2.80135 11.0598 3.89087 9.78132C4.35775 9.23346 4.63991 8.55227 4.69717 7.83474C4.83079 6.16031 6.16043 4.83067 7.83486 4.69705Z"
+                    stroke="orange"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+            <p className="text-[15px] text-gray-500">{username}</p>
           </div>
           <button className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-black transition">
             <MoreVertical className="h-4 w-4" />
@@ -67,10 +77,10 @@ export default function ProfileCard() {
 
         {/* Stats */}
         <div className="mt-4 flex items-center gap-4">
-          {STATS.map((s) => {
+          {stats.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={s.value} className="flex items-center gap-1.5">
+              <div key={i} className="flex items-center gap-1.5">
                 <Icon className="h-3.5 w-3.5 text-gray-400" />
                 <span className="text-[14px] font-semibold text-black">{s.value}</span>
               </div>
@@ -81,9 +91,9 @@ export default function ProfileCard() {
         {/* Bio */}
         <div className="mt-3">
           <p className="text-[15px] leading-relaxed text-black">
-            {expanded ? BIO : short + (BIO.length > 120 ? "…" : "")}
+            {expanded ? bio : short + (bio.length > 120 ? "…" : "")}
           </p>
-          {BIO.length > 120 && (
+          {bio.length > 120 && (
             <button
               onClick={() => setExpanded(!expanded)}
               className="mt-1 text-[12px] font-semibold text-[#e89c30] hover:underline"

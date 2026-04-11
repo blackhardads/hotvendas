@@ -3,16 +3,25 @@
 import { useState } from "react";
 import { ChevronUp } from "lucide-react";
 
-const PLANS = [
-  { id: "monthly",   label: "1 Mês (26% off)",             price: "R$ 13,87", amount: 13.87 },
-  { id: "quarterly", label: "3 meses (42% off)",  price: "R$ 37,87", amount: 37.87 },
+const DEFAULT_PLANS = [
+  { id: "monthly",   label: "1 Mês (26% off)",    price: "R$ 13,87", amount: 13.87 },
+  { id: "quarterly", label: "3 meses (42% off)",   price: "R$ 37,87", amount: 37.87 },
   { id: "lifetime",  label: "Vitalício (50% off)", price: "R$ 87,98", amount: 87.98 },
 ];
 
+interface Plan {
+  id: string;
+  label: string;
+  price: string;
+  amount: number;
+}
+
 export default function PlansSection({
   onSelect,
+  plans = DEFAULT_PLANS,
 }: {
   onSelect: (label: string, amount: number) => void;
+  plans?: Plan[];
 }) {
   const [open, setOpen] = useState(true);
 
@@ -32,7 +41,7 @@ export default function PlansSection({
       {/* Plan rows */}
       {open && (
         <div className="px-3 pb-3 space-y-2">
-          {PLANS.map((plan) => (
+          {plans.map((plan) => (
           <button
   key={plan.id}
   onClick={() => onSelect(plan.label, plan.amount)}

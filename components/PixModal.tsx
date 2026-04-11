@@ -16,6 +16,9 @@ interface Props {
   onClose: () => void;
   planLabel: string;
   planAmount: number;
+  creatorName?: string;
+  creatorHandle?: string;
+  profileImg?: string;
 }
 
 function formatBRL(value: number) {
@@ -26,7 +29,15 @@ function qrUrl(data: string) {
   return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&format=png&data=${encodeURIComponent(data)}`;
 }
 
-export default function PixModal({ isOpen, onClose, planLabel, planAmount }: Props) {
+export default function PixModal({
+  isOpen,
+  onClose,
+  planLabel,
+  planAmount,
+  creatorName = "Emilly Faria",
+  creatorHandle = "@millyfaria4",
+  profileImg = "img/profile-img.png",
+}: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [pixCode, setPixCode] = useState<string | null>(null);
   const [identifier, setIdentifier] = useState<string | null>(null);
@@ -165,14 +176,14 @@ export default function PixModal({ isOpen, onClose, planLabel, planAmount }: Pro
             <div className="flex items-start gap-3">
               <div className="h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border-[3px] border-[#181818] bg-gradient-to-br from-[#e89c30]/40 to-[#1a1208] flex items-center justify-center">
   <img
-    src="img/profile-img.png"
+    src={profileImg}
     alt="Avatar"
     className="h-full w-full object-cover"
   />
 </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[20px] font-semibold tracking-[-0.04em] text-white leading-tight">Emilly Faria</p>
-                <p className="text-[13px] text-white/45">@millyfaria4</p>
+                <p className="text-[20px] font-semibold tracking-[-0.04em] text-white leading-tight">{creatorName}</p>
+                <p className="text-[13px] text-white/45">{creatorHandle}</p>
                 <div className="mt-3 rounded-xl bg-[#111111] px-3 py-2.5">
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#e89c30]">VALOR</p>
                   <p className="mt-0.5 text-[26px] font-semibold tracking-[-0.05em] text-white leading-none">

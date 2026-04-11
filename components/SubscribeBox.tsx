@@ -20,9 +20,11 @@ function useCountdown(targetSeconds: number) {
 export default function SubscribeBox({
   onSubscribe,
   onLogin,
+  creatorName = "Milly",
 }: {
   onSubscribe: () => void;
   onLogin: () => void;
+  creatorName?: string;
 }) {
   const { d, h, m, s } = useCountdown(1 * 24 * 3600 + 4 * 3600 + 59 * 60 + 10);
 
@@ -68,7 +70,7 @@ export default function SubscribeBox({
         onClick={onLogin}
         className="w-full rounded-2xl border border-gray-200 bg-gray-100 py-3 text-[16px] font-semibold text-black transition hover:bg-gray-200 hover:text-black"
       >
-        ★ Ligar agora para Milly?
+        ★ Ligar agora para {creatorName}?
       </button>
 
       {/* Original price */}

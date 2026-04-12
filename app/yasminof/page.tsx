@@ -40,9 +40,9 @@ const STATS = [
 ];
 
 const PLANS = [
-  { id: "monthly",   label: "1 Month",            price: "R$ 13,87", amount: 13.87, planLabel: "1 Month (26% off)",    stripeUrl: "#" },
-  { id: "quarterly", label: "3 Months (42% off)", price: "R$ 37,87", amount: 37.87, planLabel: "3 Months (42% off)",   stripeUrl: "#" },
-  { id: "lifetime",  label: "Lifetime (50% off)", price: "R$ 87,98", amount: 87.98, planLabel: "Lifetime (50% off)",   stripeUrl: "#" },
+  { id: "monthly",   label: "1 Month",            price: "R$ 4,87", amount: 4.87, planLabel: "1 Month (26% off)",    stripeUrl: "https://buy.stripe.com/14AdR91bg8632NXakgeIw09" },
+  { id: "quarterly", label: "3 Months (42% off)", price: "R$ 9,87", amount: 9.87, planLabel: "3 Months (42% off)",   stripeUrl: "https://buy.stripe.com/dRmeVd1bggCzbkt1NKeIw0a" },
+  { id: "lifetime",  label: "Lifetime (50% off)", price: "R$ 35,90", amount: 35.98, planLabel: "Lifetime (50% off)",   stripeUrl: "https://buy.stripe.com/8x200jf264TRfAJ3VSeIw0b" },
 ];
 
 const FEED_ITEMS = [
@@ -219,7 +219,7 @@ function OFSubscribeBox() {
           className="block w-full rounded-full py-3.5 text-center text-[15px] font-bold text-white transition hover:opacity-90"
           style={{ background: OF_BLUE }}
         >
-          Subscribe now — R$ 13,87/month
+          Subscribe now — R$ 4,87/month
         </a>
       </div>
 

@@ -114,7 +114,7 @@ export default function PixModal({
     const poll = async () => {
       if (abortRef.current) return;
       try {
-        const res = await fetch(`/api/payment/status/${identifier}`);
+        const res = await fetch(`/api/payment/status/${identifier}?page=${encodeURIComponent(creatorName)}`);
         const data = await res.json();
         if (abortRef.current) return;
         if (data.status === "completed") setStatus("completed");

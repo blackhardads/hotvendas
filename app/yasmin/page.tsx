@@ -95,7 +95,7 @@ export default function Yasmin() {
         creatorName={CREATOR.name}
         creatorHandle={CREATOR.username}
         profileImg={CREATOR.profileImg}
-        deliverableLink="https://t.me/+GNFQawBbmtIwMTgx"
+        creatorSlug="yasmin"
       />
     </>
   );

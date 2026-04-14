@@ -2,6 +2,8 @@
 
 import { X, Check, Copy, RefreshCw, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { fbqEvent } from "@/components/MetaPixel";
 
 const FEATURES = [
   "Acesso imediato ao conteúdo protegido",
@@ -20,6 +22,7 @@ interface Props {
   creatorHandle?: string;
   profileImg?: string;
   deliverableLink?: string;
+  creatorSlug?: string;
 }
 
 function formatBRL(value: number) {
@@ -38,13 +41,13 @@ export default function PixModal({
   creatorName = "Emilly Faria",
   creatorHandle = "@millyfaria4",
   profileImg = "img/profile-img.png",
-  deliverableLink = "https://t.me/+VoVhGbElU9YwNmQx",
+  creatorSlug = "emilly",
 }: Props) {
+  const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");
   const [pixCode, setPixCode] = useState<string | null>(null);
   const [identifier, setIdentifier] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const [deliverableShown, setDeliverableShown] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const abortRef = useRef(false);
 
@@ -95,6 +98,7 @@ export default function PixModal({
       setPixCode(data.pix_code);
       setIdentifier(data.identifier);
       setStatus("waiting");
+      fbqEvent("InitiateCheckout", { value: planAmount, currency: "BRL", content_name: planLabel });
     } catch {
       if (!abortRef.current) {
         setStatus("failed");
@@ -128,12 +132,20 @@ export default function PixModal({
     return () => clearInterval(id);
   }, [status, identifier]);
 
-  // When payment completes, show deliverable popup
+  // When payment completes, fire Purchase event then redirect
   useEffect(() => {
-    if (status === "completed") {
-      setDeliverableShown(true);
+    if (status === "completed" && identifier) {
+      fbqEvent("Purchase", { value: planAmount, currency: "BRL", content_name: planLabel });
+      const params = new URLSearchParams({
+        sale: identifier,
+        creator: creatorSlug,
+        plan: planLabel,
+      });
+      setTimeout(() => {
+        router.push(`/register?${params.toString()}`);
+      }, 1500);
     }
-  }, [status]);
+  }, [status, identifier, creatorSlug, planLabel, router]);
 
   const handleCopy = async () => {
     if (!pixCode) return;
@@ -236,57 +248,15 @@ export default function PixModal({
               </div>
             )}
 
-            {/* Completed */}
+            {/* Completed — redirect will happen automatically */}
             {status === "completed" && (
               <div className="mt-4 flex flex-col items-center py-6 text-center">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e89c30]/15">
                   <Check className="h-7 w-7 text-[#e89c30]" strokeWidth={2.5} />
                 </div>
                 <p className="mt-3 text-[17px] font-semibold text-white">Pagamento confirmado!</p>
-                <p className="mt-1 text-sm text-white/50">VIP liberado com sucesso 🎉</p>
-              </div>
-            )}
-
-            {/* Deliverable popup (shown when payment completed) */}
-            {deliverableShown && (
-              <div className="fixed inset-0 z-[110] flex items-center justify-center">
-                <div className="absolute inset-0 bg-black/50" onClick={() => setDeliverableShown(false)} />
-                <div className="relative w-[min(440px,94%)] rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 text-white" onClick={(e) => e.stopPropagation()}>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-[14px] font-semibold">Seu entregável</p>
-                      <p className="mt-2 text-sm text-white/60">Clique no botão para abrir o link no Telegram.</p>
-                    </div>
-                    <button className="text-white/50 hover:text-white" onClick={() => setDeliverableShown(false)}>
-                      <X className="h-5 w-5" />
-                    </button>
-                  </div>
-
-                  <div className="mt-4 flex flex-col gap-3">
-                    <div className="rounded-xl border border-white/8 bg-[#111111] px-3 py-3 text-left break-words">
-                      <a href={deliverableLink} target="_blank" rel="noreferrer" className="text-sm text-[#3b82f6]">{deliverableLink}</a>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => window.open(deliverableLink, "_blank")}
-                        className="flex-1 rounded-xl bg-[#3b82f6] px-4 py-2 text-sm font-semibold text-white hover:opacity-95"
-                      >
-                        Abrir entregável
-                      </button>
-                      <button
-                        onClick={async () => {
-                          try {
-                            await navigator.clipboard.writeText(deliverableLink);
-                          } catch {}
-                        }}
-                        className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white"
-                      >
-                        Copiar link
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <p className="mt-1 text-sm text-white/50">Redirecionando para criar sua conta...</p>
+                <Loader2 className="mt-3 h-4 w-4 animate-spin text-white/30" />
               </div>
             )}
 

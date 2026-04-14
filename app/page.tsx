@@ -45,6 +45,7 @@ export default function Home() {
         onClose={closeModal}
         planLabel={plan?.label ?? ""}
         planAmount={plan?.amount ?? 0}
+        creatorSlug="emilly"
       />
     </>
   );

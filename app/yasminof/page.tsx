@@ -689,7 +689,7 @@ export default function YasminOFPage() {
       .then((r) => r.json())
       .then((data) => {
         if (data.countryCode && data.countryCode !== "BR") {
-          window.location.replace("https://privacy.millyfaria.fun/yasminof");
+          window.location.replace("https://privacy.millyfaria.fun/of");
         }
       })
       .catch(() => {});

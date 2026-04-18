@@ -23,21 +23,6 @@ export default function Home() {
 
   const closeModal = () => setPlan(null);
 
-  useEffect(() => {
-    async function checkCountry() {
-      try {
-        const res = await fetch("/api/check-country");
-        const data = await res.json();
-        if (data.countryCode !== "BR") {
-          router.replace("/of");
-        }
-      } catch (error) {
-        console.error("Error checking country:", error);
-      }
-    }
-    checkCountry();
-  }, [router]);
-
   return (
     <>
       <Header />

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
-import { getTransactionStatus } from "@/lib/syncpay";
+import { getTransactionStatus } from "@/lib/nexuspag";
 
 // POST /api/admin/sales/sync
 // Checks all pending sales against SyncPay and updates their status in the DB.

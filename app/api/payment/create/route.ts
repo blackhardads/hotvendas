@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createPixCharge } from "@/lib/syncpay";
+import { createPixCharge } from "@/lib/nexuspag";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       pix_code: data.pix_code,
+      qr_code: data.qr_code,
       identifier: data.identifier,
     });
   } catch (err) {

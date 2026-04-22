@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTransactionStatus } from "@/lib/syncpay";
+import { getTransactionStatus } from "@/lib/nexuspag";
 import { sendSaleNotification } from "@/lib/telegram";
 import { supabaseAdmin } from "@/lib/supabase";
 

@@ -61,7 +61,7 @@ export default function SubscribeBox({
             background: "linear-gradient(90deg, #e89c30 0%, #f5bc6a 60%, #f8c97e 100%)",
           }}
         >
-          Assinar agora R$ 13,87
+          Assinar agora R$ 19,87
         </button>
       </div>
 

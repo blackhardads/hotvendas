@@ -63,13 +63,13 @@ export default function Home() {
           <ProfileCard />
 
           <SubscribeBox
-            onSubscribe={() => openModal("1 Mês", 19.87)}
-            onLogin={() => openModal("1 Mês", 19.87)}
+            onSubscribe={() => openModal("1 Mês", 7.87)}
+            onLogin={() => openModal("1 Mês", 7.87)}
           />
 
           <PlansSection onSelect={(label, amount) => openModal(label, amount)} />
 
-          <ContentFeed onLockedClick={() => openModal("1 Mês", 19.87)} />
+          <ContentFeed onLockedClick={() => openModal("1 Mês", 7.87)} />
         </div>
       </main>
 

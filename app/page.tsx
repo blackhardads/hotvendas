@@ -21,16 +21,28 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    async function checkAuth() {
+    async function checkAuthAndLocation() {
       const { data: userData } = await supabaseBrowser.auth.getUser();
       if (userData.user) {
         router.replace("/content/emilly");
         return;
       }
+
+      try {
+        const res = await fetch("/api/check-country");
+        const data = await res.json();
+        if (data.countryCode && data.countryCode !== "BR") {
+          router.replace("/of");
+          return;
+        }
+      } catch {
+        // Se der erro ao detectar país, assume Brasil
+      }
+
       setMounted(true);
     }
 
-    checkAuth();
+    checkAuthAndLocation();
   }, [router]);
 
   if (!mounted) return null;

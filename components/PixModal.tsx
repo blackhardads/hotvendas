@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Check, Copy, RefreshCw, Loader2 } from "lucide-react";
+import { X, Check, Copy, RefreshCw, Loader2, CreditCard } from "lucide-react";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { fbqEvent } from "@/components/MetaPixel";
@@ -13,6 +13,7 @@ const FEATURES = [
 ];
 
 type Status = "idle" | "creating" | "waiting" | "completed" | "failed" | "expired";
+type PaymentMethod = "none" | "pix" | "card";
 
 interface Props {
   isOpen: boolean;
@@ -46,6 +47,7 @@ export default function PixModal({
 }: Props) {
   const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("none");
   const [pixCode, setPixCode] = useState<string | null>(null);
   const [identifier, setIdentifier] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -62,6 +64,7 @@ export default function PixModal({
     if (!isOpen) {
       abortRef.current = true;
       setStatus("idle");
+      setPaymentMethod("none");
       setPixCode(null);
       setIdentifier(null);
       setCopied(false);
@@ -109,9 +112,41 @@ export default function PixModal({
     }
   }, [planAmount, planLabel]);
 
+  const handleSelectPix = useCallback(() => {
+    setPaymentMethod("pix");
+  }, []);
+
+  const handleSelectCard = useCallback(async () => {
+    setPaymentMethod("card");
+    try {
+      const res = await fetch("/api/stripe/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: planAmount,
+          description: `${planLabel} — Milly Privacy`,
+          planLabel,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setPaymentMethod("none");
+        setErrorMsg(data.error ?? "Erro ao processar cartão.");
+      }
+    } catch (err) {
+      setPaymentMethod("none");
+      setErrorMsg("Erro de conexão. Tente novamente.");
+    }
+  }, [planAmount, planLabel]);
+
   useEffect(() => {
-    if (isOpen && status === "idle") createCharge();
-  }, [isOpen, status, createCharge]);
+    if (isOpen && paymentMethod === "pix" && status === "idle") {
+      createCharge();
+    }
+  }, [isOpen, paymentMethod, status, createCharge]);
 
   // Poll payment status every 5s
   useEffect(() => {
@@ -240,8 +275,27 @@ export default function PixModal({
             <div className="my-4 border-t border-white/8" />
             <h3 className="text-[15px] font-semibold text-white">Formas de pagamento</h3>
 
+            {/* Payment method selection */}
+            {paymentMethod === "none" && (
+              <div className="mt-4 space-y-3">
+                <button
+                  onClick={handleSelectPix}
+                  className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-[15px] font-semibold text-white transition hover:bg-white/10 hover:border-white/25"
+                >
+                  PIX Instantâneo
+                </button>
+                <button
+                  onClick={handleSelectCard}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#667eea] to-[#764ba2] px-4 py-3.5 text-[15px] font-semibold text-white transition hover:opacity-90"
+                >
+                  <CreditCard className="h-4 w-4" />
+                  Cartão de Crédito ({formatBRL(planAmount)})
+                </button>
+              </div>
+            )}
+
             {/* Creating */}
-            {status === "creating" && (
+            {paymentMethod === "pix" && status === "creating" && (
               <div className="flex flex-col items-center py-10">
                 <Loader2 className="h-9 w-9 animate-spin text-[#e89c30]" />
                 <p className="mt-4 text-sm text-white/55">Gerando pagamento PIX...</p>
@@ -249,7 +303,7 @@ export default function PixModal({
             )}
 
             {/* Failed / expired */}
-            {(status === "failed" || status === "expired") && (
+            {paymentMethod === "pix" && (status === "failed" || status === "expired") && (
               <div className="mt-4 flex flex-col items-center py-6 text-center">
                 <p className="text-sm text-white/60">
                   {status === "expired" ? "PIX expirado." : (errorMsg ?? "Erro ao gerar o PIX.")}
@@ -264,7 +318,7 @@ export default function PixModal({
             )}
 
             {/* Completed — redirect will happen automatically */}
-            {status === "completed" && (
+            {paymentMethod === "pix" && status === "completed" && (
               <div className="mt-4 flex flex-col items-center py-6 text-center">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e89c30]/15">
                   <Check className="h-7 w-7 text-[#e89c30]" strokeWidth={2.5} />
@@ -276,7 +330,7 @@ export default function PixModal({
             )}
 
             {/* Waiting — QR + copy */}
-            {status === "waiting" && pixCode && (
+            {paymentMethod === "pix" && status === "waiting" && pixCode && (
               <div className="mt-4 text-center">
                 <p className="text-[12px] font-semibold text-[#e89c30]">PIX gerado com sucesso</p>
                 <h4 className="mt-2 text-[17px] font-semibold text-white">Escaneie o QR Code</h4>

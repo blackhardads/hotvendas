@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Check, Copy, RefreshCw, Loader2, CreditCard } from "lucide-react";
+import { X, Check, Copy, RefreshCw, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { fbqEvent } from "@/components/MetaPixel";
@@ -29,10 +29,6 @@ interface Props {
 
 function formatBRL(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
-function qrUrl(data: string) {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&format=png&data=${encodeURIComponent(data)}`;
 }
 
 export default function PixModal({
@@ -115,32 +111,6 @@ export default function PixModal({
   const handleSelectPix = useCallback(() => {
     setPaymentMethod("pix");
   }, []);
-
-  const handleSelectCard = useCallback(async () => {
-    setPaymentMethod("card");
-    try {
-      const res = await fetch("/api/stripe/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: planAmount,
-          description: `${planLabel} — Milly Privacy`,
-          planLabel,
-        }),
-      });
-
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setPaymentMethod("none");
-        setErrorMsg(data.error ?? "Erro ao processar cartão.");
-      }
-    } catch (err) {
-      setPaymentMethod("none");
-      setErrorMsg("Erro de conexão. Tente novamente.");
-    }
-  }, [planAmount, planLabel]);
 
   useEffect(() => {
     if (isOpen && paymentMethod === "pix" && status === "idle") {
@@ -285,14 +255,6 @@ export default function PixModal({
                 >
                   ✓ PIX Instantâneo
                 </button>
-                <button
-                  onClick={handleSelectCard}
-                  className="w-full rounded-2xl border-2 border-[#3b82f6] px-5 py-4 text-[16px] font-bold text-black transition hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] flex items-center justify-center gap-2"
-                  style={{ background: "linear-gradient(90deg, #60a5fa, #3b82f6, #1e40af)" }}
-                >
-                  <CreditCard className="h-5 w-5" />
-                  Cartão de Crédito
-                </button>
               </div>
             )}
 
@@ -331,20 +293,11 @@ export default function PixModal({
               </div>
             )}
 
-            {/* Waiting — QR + copy */}
+            {/* Waiting — copy PIX code */}
             {paymentMethod === "pix" && status === "waiting" && pixCode && (
               <div className="mt-4 text-center">
                 <p className="text-[12px] font-semibold text-[#e89c30]">PIX gerado com sucesso</p>
-                <h4 className="mt-2 text-[17px] font-semibold text-black">Escaneie o QR Code</h4>
-
-                <div className="mt-4 flex justify-center">
-                  <div className="flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-[14px] bg-white border border-gray-200 p-2 shadow-[0_8px_24px_rgba(0,0,0,0.1)]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={qrUrl(pixCode)} alt="QR Code PIX" className="h-full w-full object-contain" />
-                  </div>
-                </div>
-
-                <p className="mt-4 text-[14px] font-semibold text-black">Ou copie o código PIX</p>
+                <h4 className="mt-4 text-[17px] font-semibold text-black">Copie o código PIX</h4>
                 <div className="mt-2 rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 text-left">
                   <p className="line-clamp-2 break-all text-[12px] text-gray-600">{pixCode}</p>
                 </div>

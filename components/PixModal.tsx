@@ -280,13 +280,13 @@ export default function PixModal({
               <div className="mt-6 space-y-3">
                 <button
                   onClick={handleSelectPix}
-                  className="w-full rounded-2xl border-2 border-[#e89c30] bg-gradient-to-br from-[#e89c30]/10 to-white px-5 py-4 text-[16px] font-bold text-black transition hover:from-[#e89c30]/20 hover:shadow-[0_0_20px_rgba(232,156,48,0.3)]"
+                  className="w-full rounded-2xl border-2 border-[#e89c30] bg-[#e89c30] px-5 py-4 text-[16px] font-bold text-white transition hover:bg-[#d4861f] hover:border-[#d4861f] hover:shadow-[0_0_20px_rgba(232,156,48,0.4)]"
                 >
-                  ✓ PIX Instantâneo
+                  ✓ PIX Instantâneo ({formatBRL(planAmount)})
                 </button>
                 <button
                   onClick={handleSelectCard}
-                  className="w-full rounded-2xl border-2 border-[#3b82f6] bg-gradient-to-br from-[#3b82f6]/10 to-white px-5 py-4 text-[16px] font-bold text-black transition hover:from-[#3b82f6]/20 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
+                  className="w-full rounded-2xl border-2 border-[#3b82f6] bg-[#3b82f6] px-5 py-4 text-[16px] font-bold text-white transition hover:bg-[#2563eb] hover:border-[#2563eb] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] flex items-center justify-center gap-2"
                 >
                   <CreditCard className="h-5 w-5" />
                   Cartão de Crédito ({formatBRL(planAmount)})

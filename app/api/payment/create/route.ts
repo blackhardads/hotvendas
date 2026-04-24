@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       pix_code: data.pix_code,
-      qr_code: data.qr_code,
       identifier: data.identifier,
     });
   } catch (err) {

@@ -5,8 +5,8 @@ import { ChevronUp } from "lucide-react";
 
 const DEFAULT_PLANS = [
   { id: "monthly",   label: "1 Mês (26% off)",    price: "R$ 13,87", amount: 13.87 },
-  { id: "quarterly", label: "3 meses (42% off)",   price: "R$ 19,87", amount: 19.87 },
-  { id: "lifetime",  label: "Vitalício (50% off)", price: "R$ 35,98", amount: 35.98 },
+  { id: "quarterly", label: "3 meses (42% off)",   price: "R$ 33,87", amount: 33.87 },
+  { id: "lifetime",  label: "Vitalício (50% off)", price: "R$ 65,98", amount: 65.98 },
 ];
 
 interface Plan {

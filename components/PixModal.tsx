@@ -277,18 +277,18 @@ export default function PixModal({
 
             {/* Payment method selection */}
             {paymentMethod === "none" && (
-              <div className="mt-4 space-y-3">
+              <div className="mt-6 space-y-3">
                 <button
                   onClick={handleSelectPix}
-                  className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-[15px] font-semibold text-white transition hover:bg-white/10 hover:border-white/25"
+                  className="w-full rounded-2xl border-2 border-[#e89c30] bg-gradient-to-br from-[#e89c30]/20 to-[#e89c30]/5 px-5 py-4 text-[16px] font-bold text-white transition hover:from-[#e89c30]/30 hover:to-[#e89c30]/10 hover:shadow-[0_0_20px_rgba(232,156,48,0.3)]"
                 >
-                  PIX Instantâneo
+                  ✓ PIX Instantâneo
                 </button>
                 <button
                   onClick={handleSelectCard}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#667eea] to-[#764ba2] px-4 py-3.5 text-[15px] font-semibold text-white transition hover:opacity-90"
+                  className="w-full rounded-2xl border-2 border-[#3b82f6] bg-gradient-to-br from-[#3b82f6]/20 to-[#3b82f6]/5 px-5 py-4 text-[16px] font-bold text-white transition hover:from-[#3b82f6]/30 hover:to-[#3b82f6]/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
                 >
-                  <CreditCard className="h-4 w-4" />
+                  <CreditCard className="h-5 w-5" />
                   Cartão de Crédito ({formatBRL(planAmount)})
                 </button>
               </div>

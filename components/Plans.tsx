@@ -36,7 +36,7 @@ const PLANS = [
   {
     id: "quarterly",
     name: "Trimestral",
-    priceUsd: 7.23,
+    priceUsd: 33.87,
     interval: "trimestre",
     popular: false,
     savePct: 20,
@@ -53,7 +53,7 @@ const PLANS = [
   {
     id: "lifetime",
     name: "Vitalício",
-    priceUsd: 10.19,
+    priceUsd: 65.98,
     interval: null,
     popular: false,
     savePct: null,

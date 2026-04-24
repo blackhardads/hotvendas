@@ -216,18 +216,18 @@ export default function PixModal({
       <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
 
       <div
-        className="relative w-full max-w-[480px] overflow-hidden rounded-t-[28px] border border-white/10 bg-[#0f0f0f] text-white sm:rounded-[28px]"
+        className="relative w-full max-w-[480px] overflow-hidden rounded-t-[28px] border border-gray-200 bg-white text-black sm:rounded-[28px]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#e89c30]/80">SYNCPAY</p>
-            <h2 className="text-[18px] font-semibold tracking-[-0.04em] text-white">Pagamento PIX</h2>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#e89c30]">SYNCPAY</p>
+            <h2 className="text-[18px] font-semibold tracking-[-0.04em] text-black">Pagamento PIX</h2>
           </div>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-white/50 transition hover:bg-white/8 hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition hover:bg-gray-100 hover:text-black"
           >
             <X className="h-4 w-4" />
           </button>
@@ -237,9 +237,9 @@ export default function PixModal({
         <div className="max-h-[82vh] overflow-y-auto px-5 pb-6 pt-4">
 
           {/* Profile + amount */}
-          <div className="rounded-[20px] border border-white/8 bg-[#181818] p-4">
+          <div className="rounded-[20px] border border-gray-200 bg-gray-50 p-4">
             <div className="flex items-start gap-3">
-              <div className="h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border-[3px] border-[#181818] bg-gradient-to-br from-[#e89c30]/40 to-[#1a1208] flex items-center justify-center">
+              <div className="h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border-[3px] border-gray-50 bg-gradient-to-br from-[#e89c30]/40 to-[#1a1208] flex items-center justify-center">
   <img
     src={profileImg}
     alt="Avatar"
@@ -247,46 +247,46 @@ export default function PixModal({
   />
 </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[20px] font-semibold tracking-[-0.04em] text-white leading-tight">{creatorName}</p>
-                <p className="text-[13px] text-white/45">{creatorHandle}</p>
-                <div className="mt-3 rounded-xl bg-[#111111] px-3 py-2.5">
+                <p className="text-[20px] font-semibold tracking-[-0.04em] text-black leading-tight">{creatorName}</p>
+                <p className="text-[13px] text-gray-500">{creatorHandle}</p>
+                <div className="mt-3 rounded-xl bg-white border border-gray-200 px-3 py-2.5">
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#e89c30]">VALOR</p>
-                  <p className="mt-0.5 text-[26px] font-semibold tracking-[-0.05em] text-white leading-none">
+                  <p className="mt-0.5 text-[26px] font-semibold tracking-[-0.05em] text-black leading-none">
                     {formatBRL(planAmount)}
                   </p>
-                  <p className="mt-0.5 text-[11px] text-white/80">{planLabel}</p>
+                  <p className="mt-0.5 text-[11px] text-gray-600">{planLabel}</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Benefits + payment */}
-          <div className="mt-4 rounded-[20px] border border-white/8 bg-[#181818] p-4">
-            <h3 className="text-[15px] font-semibold text-white">Beneficios exclusivos</h3>
+          <div className="mt-4 rounded-[20px] border border-gray-200 bg-gray-50 p-4">
+            <h3 className="text-[15px] font-semibold text-black">Beneficios exclusivos</h3>
             <ul className="mt-3 space-y-2.5">
               {FEATURES.map((f) => (
-                <li key={f} className="flex items-center gap-2.5 text-[14px] text-white/70">
+                <li key={f} className="flex items-center gap-2.5 text-[14px] text-gray-700">
                   <Check className="h-4 w-4 shrink-0 text-[#e89c30]" strokeWidth={2.5} />
                   {f}
                 </li>
               ))}
             </ul>
 
-            <div className="my-4 border-t border-white/8" />
-            <h3 className="text-[15px] font-semibold text-white">Formas de pagamento</h3>
+            <div className="my-4 border-t border-gray-200" />
+            <h3 className="text-[15px] font-semibold text-black">Formas de pagamento</h3>
 
             {/* Payment method selection */}
             {paymentMethod === "none" && (
               <div className="mt-6 space-y-3">
                 <button
                   onClick={handleSelectPix}
-                  className="w-full rounded-2xl border-2 border-[#e89c30] bg-gradient-to-br from-[#e89c30]/20 to-[#e89c30]/5 px-5 py-4 text-[16px] font-bold text-white transition hover:from-[#e89c30]/30 hover:to-[#e89c30]/10 hover:shadow-[0_0_20px_rgba(232,156,48,0.3)]"
+                  className="w-full rounded-2xl border-2 border-[#e89c30] bg-gradient-to-br from-[#e89c30]/10 to-white px-5 py-4 text-[16px] font-bold text-black transition hover:from-[#e89c30]/20 hover:shadow-[0_0_20px_rgba(232,156,48,0.3)]"
                 >
                   ✓ PIX Instantâneo
                 </button>
                 <button
                   onClick={handleSelectCard}
-                  className="w-full rounded-2xl border-2 border-[#3b82f6] bg-gradient-to-br from-[#3b82f6]/20 to-[#3b82f6]/5 px-5 py-4 text-[16px] font-bold text-white transition hover:from-[#3b82f6]/30 hover:to-[#3b82f6]/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
+                  className="w-full rounded-2xl border-2 border-[#3b82f6] bg-gradient-to-br from-[#3b82f6]/10 to-white px-5 py-4 text-[16px] font-bold text-black transition hover:from-[#3b82f6]/20 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
                 >
                   <CreditCard className="h-5 w-5" />
                   Cartão de Crédito ({formatBRL(planAmount)})
@@ -298,19 +298,19 @@ export default function PixModal({
             {paymentMethod === "pix" && status === "creating" && (
               <div className="flex flex-col items-center py-10">
                 <Loader2 className="h-9 w-9 animate-spin text-[#e89c30]" />
-                <p className="mt-4 text-sm text-white/55">Gerando pagamento PIX...</p>
+                <p className="mt-4 text-sm text-gray-600">Gerando pagamento PIX...</p>
               </div>
             )}
 
             {/* Failed / expired */}
             {paymentMethod === "pix" && (status === "failed" || status === "expired") && (
               <div className="mt-4 flex flex-col items-center py-6 text-center">
-                <p className="text-sm text-white/60">
+                <p className="text-sm text-gray-600">
                   {status === "expired" ? "PIX expirado." : (errorMsg ?? "Erro ao gerar o PIX.")}
                 </p>
                 <button
                   onClick={createCharge}
-                  className="mt-4 flex items-center gap-2 rounded-xl border border-white/12 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+                  className="mt-4 flex items-center gap-2 rounded-xl border border-gray-300 bg-gray-100 px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-gray-200"
                 >
                   <RefreshCw className="h-4 w-4" /> Tentar novamente
                 </button>
@@ -323,9 +323,9 @@ export default function PixModal({
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e89c30]/15">
                   <Check className="h-7 w-7 text-[#e89c30]" strokeWidth={2.5} />
                 </div>
-                <p className="mt-3 text-[17px] font-semibold text-white">Pagamento confirmado!</p>
-                <p className="mt-1 text-sm text-white/50">Redirecionando para criar sua conta...</p>
-                <Loader2 className="mt-3 h-4 w-4 animate-spin text-white/30" />
+                <p className="mt-3 text-[17px] font-semibold text-black">Pagamento confirmado!</p>
+                <p className="mt-1 text-sm text-gray-500">Redirecionando para criar sua conta...</p>
+                <Loader2 className="mt-3 h-4 w-4 animate-spin text-gray-400" />
               </div>
             )}
 
@@ -333,18 +333,18 @@ export default function PixModal({
             {paymentMethod === "pix" && status === "waiting" && pixCode && (
               <div className="mt-4 text-center">
                 <p className="text-[12px] font-semibold text-[#e89c30]">PIX gerado com sucesso</p>
-                <h4 className="mt-2 text-[17px] font-semibold text-white">Escaneie o QR Code</h4>
+                <h4 className="mt-2 text-[17px] font-semibold text-black">Escaneie o QR Code</h4>
 
                 <div className="mt-4 flex justify-center">
-                  <div className="flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-[14px] bg-white p-2 shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
+                  <div className="flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-[14px] bg-white border border-gray-200 p-2 shadow-[0_8px_24px_rgba(0,0,0,0.1)]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={qrUrl(pixCode)} alt="QR Code PIX" className="h-full w-full object-contain" />
                   </div>
                 </div>
 
-                <p className="mt-4 text-[14px] font-semibold text-white">Ou copie o código PIX</p>
-                <div className="mt-2 rounded-xl border border-white/10 bg-[#1a1a1a] px-3 py-2.5 text-left">
-                  <p className="line-clamp-2 break-all text-[12px] text-white/55">{pixCode}</p>
+                <p className="mt-4 text-[14px] font-semibold text-black">Ou copie o código PIX</p>
+                <div className="mt-2 rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 text-left">
+                  <p className="line-clamp-2 break-all text-[12px] text-gray-600">{pixCode}</p>
                 </div>
 
                 <button
@@ -355,16 +355,16 @@ export default function PixModal({
                   {copied ? "Código copiado!" : "Copiar código PIX"}
                 </button>
 
-                <div className="mt-4 rounded-2xl border border-white/8 bg-[#181818] p-3.5 text-left">
+                <div className="mt-4 rounded-2xl border border-gray-200 bg-gray-50 p-3.5 text-left">
                   <div className="flex items-start gap-2.5">
-                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#e89c30]/40 bg-[#1d1308] text-[10px] font-bold text-[#e89c30]">
+                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#e89c30] bg-[#e89c30]/10 text-[10px] font-bold text-[#e89c30]">
                       i
                     </div>
                     <div>
-                      <p className="text-[13px] font-medium text-white/80">
+                      <p className="text-[13px] font-medium text-gray-700">
                         Abra o app do seu banco, escaneie o QR Code ou cole o código PIX para concluir o pagamento.
                       </p>
-                      <p className="mt-1.5 flex items-center gap-1.5 text-[12px] text-white/45">
+                      <p className="mt-1.5 flex items-center gap-1.5 text-[12px] text-gray-500">
                         <Loader2 className="h-3 w-3 animate-spin" />
                         Aguardando confirmação do pagamento...
                       </p>

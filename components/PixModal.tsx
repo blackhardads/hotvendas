@@ -36,10 +36,10 @@ export default function PixModal({
   onClose,
   planLabel,
   planAmount,
-  creatorName = "Emilly Faria",
-  creatorHandle = "@millyfaria4",
-  profileImg = "img/profile-img.png",
-  creatorSlug = "emilly",
+  creatorName = "Vitória Lima",
+  creatorHandle = "@vitorialima5",
+  profileImg = "img/WhatsApp Image 2026-04-25 at 11.25.40 (1).jpeg",
+  creatorSlug = "vitória",
 }: Props) {
   const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");

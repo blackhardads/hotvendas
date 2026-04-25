@@ -9,17 +9,17 @@ const TABS = [
 ];
 
 const DEFAULT_FEED_ITEMS = [
-  { id: "1", isFree: false, likes: 124, comments: 18, image: "/img/Untitled design (1) (1).png" },
-  { id: "2", isFree: false, likes: 341, comments: 47, image: "/img/Untitled design (3).png" },
+  { id: "1", isFree: false, likes: 124, comments: 18, image: "/img/WhatsApp Image 2026-04-25 at 11.25.40 (2).jpeg" },
+  { id: "2", isFree: false, likes: 341, comments: 47, image: "/img/WhatsApp Image 2026-04-25 at 11.25.41.jpeg" },
 ];
 
 type FeedItem = { id: string; isFree: boolean; likes: number; comments: number; image: string };
 
 export default function ContentFeed({
   onLockedClick,
-  creatorName = "Emilly Faria",
-  creatorHandle = "@millyfaria4",
-  profileImg = "img/profile-img.png",
+  creatorName = "Vitória Lima",
+  creatorHandle = "@vitorialima5",
+  profileImg = "img/WhatsApp Image 2026-04-25 at 11.25.40 (1).jpeg",
   feedItems = DEFAULT_FEED_ITEMS,
 }: {
   onLockedClick: () => void;
@@ -133,7 +133,7 @@ function FeedCard({
             </div>
           </>
         )}
-        <img src={item.image} alt="media" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={item.image} alt="media" className={`absolute inset-0 h-full w-full object-cover ${!item.isFree ? 'blur-sm' : ''}`} />
       </div>
 
       {/* Actions */}

@@ -70,7 +70,7 @@ export default function SubscribeBox({
         onClick={onLogin}
         className="w-full rounded-2xl border border-gray-200 bg-gray-100 py-3 text-[16px] font-semibold text-black transition hover:bg-gray-200 hover:text-black"
       >
-        ★ Ligar agora para {creatorName}?
+        ★ Ligar agora para Vitória?
       </button>
 
       {/* Original price */}

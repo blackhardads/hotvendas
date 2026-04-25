@@ -11,7 +11,7 @@ const DEFAULT_STATS = [
   { icon: Heart,     value: "364.6K" },
 ];
 
-const DEFAULT_BIO = "Só fica quem tem coragem de desvendar cada segredinho da sua Loirinha.... vem? 😜";
+const DEFAULT_BIO = "Não te conto nada, deixo você descobrir 🤭";
 
 interface ProfileCardProps {
   name?: string;
@@ -24,11 +24,11 @@ interface ProfileCardProps {
 }
 
 export default function ProfileCard({
-  name = "Emilly Faria",
-  username = "@millyfaria4",
+  name = "Vitória Lima",
+  username = "@vitorialima5",
   bio = DEFAULT_BIO,
   stats = DEFAULT_STATS,
-  profileImg = "img/profile-img.png",
+  profileImg = "img/WhatsApp Image 2026-04-25 at 11.25.40 (1).jpeg",
   coverClass = "cover-bg",
   coverImg,
 }: ProfileCardProps) {

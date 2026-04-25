@@ -40,7 +40,7 @@ const PLANS = [
 ];
 
 const FEED_ITEMS = [
-  { id: "1", isFree: false, likes: 124, comments: 18, image: "/img/Untitled design (1) (1).png" },
+  { id: "1", isFree: false, likes: 124, comments: 18, image: "/img/WhatsApp Image 2026-04-25 at 11.25.40 (2).jpeg" },
   { id: "2", isFree: false, likes: 341, comments: 47, image: "/img/Untitled design (3).png" },
 ];
 

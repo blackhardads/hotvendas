@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createPixCharge } from "@/lib/nexuspag";
+import { createPixCharge } from "@/lib/syncpay";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {

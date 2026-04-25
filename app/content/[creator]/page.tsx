@@ -17,7 +17,7 @@ interface ContentBlock {
 }
 
 const CREATOR_LABELS: Record<string, string> = {
-  emilly:   "Emilly Faria",
+  emilly:   "Vitória Lima",
   yasmin:   "Yasmin Torrez",
   yasminof: "Yasmin Torrez",
   alice:    "Alice Montenegro",

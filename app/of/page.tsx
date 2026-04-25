@@ -108,7 +108,7 @@ function OFProfileCard({ onSubscribeClick }: { onSubscribeClick: () => void }) {
       <div className="relative px-4 pb-4">
         <div className="absolute -top-10 left-4 h-[76px] w-[76px] overflow-hidden rounded-full border-[3px] border-white bg-gray-200 shadow-sm">
           <img
-            src="/img/profile-img.png"
+            src="/img/WhatsApp Image 2026-04-25 at 11.25.40 (1).jpeg"
             alt="avatar"
             className="h-full w-full object-cover"
           />
@@ -314,7 +314,7 @@ function OFFeedCard({
         <div className="flex items-center gap-2.5">
           <div className="h-9 w-9 overflow-hidden rounded-full border border-gray-200">
             <img
-              src="/img/profile-img.png"
+              src="/img/WhatsApp Image 2026-04-25 at 11.25.40 (1).jpeg"
               alt="avatar"
               className="h-full w-full object-cover"
             />

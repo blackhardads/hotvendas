@@ -4,7 +4,7 @@ import { Images, Play, Heart, MessageCircle, Bookmark, MoreHorizontal, Lock } fr
 import { useState } from "react";
 
 const TABS = [
-  { id: "posts", label: "513 Postagens", icon: Images },
+  { id: "posts", label: "514 Postagens", icon: Images },
   { id: "media", label: "1.323 Mídias", icon: Play },
 ];
 

@@ -9,8 +9,8 @@ const TABS = [
 ];
 
 const DEFAULT_FEED_ITEMS = [
-  { id: "1", isFree: false, likes: 124, comments: 18, image: "/img/WhatsApp Image 2026-04-25 at 11.25.40 (2).jpeg" },
-  { id: "2", isFree: false, likes: 341, comments: 47, image: "/img/WhatsApp Image 2026-04-25 at 11.25.41.jpeg" },
+ // { id: "1", isFree: false, likes: 124, comments: 18, image: "/img/WhatsApp Image 2026-04-25 at 11.25.40 (2).jpeg" },
+ // { id: "2", isFree: false, likes: 341, comments: 47, image: "/img/WhatsApp Image 2026-04-25 at 11.25.41.jpeg" },
 ];
 
 type FeedItem = { id: string; isFree: boolean; likes: number; comments: number; image: string };
@@ -19,7 +19,7 @@ export default function ContentFeed({
   onLockedClick,
   creatorName = "Vitória Lima",
   creatorHandle = "@vitorialima5",
-  profileImg = "img/WhatsApp Image 2026-04-25 at 11.25.40 (1).jpeg",
+  profileImg = "",
   feedItems = DEFAULT_FEED_ITEMS,
 }: {
   onLockedClick: () => void;
